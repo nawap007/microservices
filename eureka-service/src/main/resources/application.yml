@@ -8,6 +8,20 @@ server:
 eureka:
   client:
     registerWithEureka: false
+    service-url:
+      defaultZone: http://localhost:8302/eureka-service
     fetchRegistry: false
     server:
       waitTimeInMsWhenSyncEmpty: 0
+
+
+zuul:
+  #Service will be mapped under the /api URI
+  prefix: /api
+  routes:
+    db-service:
+      path: /db-service/**
+      url: http://localhost:8300
+    stock-service:
+      path: /stock-service/**
+      url: http://localhost:8301
